@@ -1,0 +1,37 @@
+spring:
+  redis:
+    host: 192.168.188.128
+    port: 6379
+    password: 123
+  resources:
+    static-locations: classpath:/abc/,classpath:/aaa/
+  #在主配置文件中，通过改参数指定激活哪一环境的配置文件 （写后缀就行）
+  #profiles:
+    #active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/youlexuandb?serverTimezone=GMT%2B8
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  data:
+    solr: #用来存储数据的
+      host: http://192.168.188.128:8088/solr
+      repositories: #仓库存储
+        enabled: true
+server:
+  port: 8081
+#springboot整合mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.offcn.pojo
+dubbo:
+  application:
+    name: demo03
+  registry: # 注册中心的地址。
+    address: zookeeper://192.168.188.128:2181
+  protocol:
+    port: 20881 #该参数默认为20880
+  #monitor:
+    #address: 监控中心地址，如果注册中心和监控中心在同一台服务骑上，可以省略该参数
+
